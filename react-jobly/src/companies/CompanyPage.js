@@ -11,26 +11,20 @@ import JoblyApi from "../api";
  *
  * State:
  * - companies: A array of company objects Like: [{company}, {company}] and loading status
- * - searchTerm: A string representing the user's search query ie 'Arnold'
+ * 
  *
  * RoutesList -> CompanyPage -> CompanyList & SearchBar
  */
 function CompanyPage() {
   const [companies, setCompanies] = useState(null);
 
-  // TODO find a way to rerender without having searchTerm state
-  // leverage companies to cause rerender, pull out fetch companies, run first time and on search
-
-  // leverage companies array to know if we're loading or not
-  // companies initially null
-
   useEffect(function getCompaniesWhenMounted() {
     fetchCompanies();
   }, []);
 
-  async function fetchCompanies(term=null) {
+  async function fetchCompanies(term = null) {
     const companyArray = await JoblyApi.getCompanies(term);
-    setCompanies( companyArray );
+    setCompanies(companyArray);
   };
 
   function search(term) {

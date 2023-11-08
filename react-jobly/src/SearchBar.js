@@ -12,29 +12,29 @@ import React, { useState, useEffect } from "react";
  * CompanyPage, JobPage --> SearchBar
  */
 function SearchBar({ search }) {
-    const [formData, setFormData] = useState({searchField: ''});
-    console.log('FORM DATA=', formData)
+    console.log("rerender");
+    const [formData, setFormData] = useState("");
+    console.log('FORM DATA=', formData);
 
-    useEffect(function getCompanies() {
-        search(formData.searchField);
-      }, [formData]);
+    useEffect(function reRender() {
+        return function cleanUp() { console.log("cleaned up"); };
+    }, []);
 
     /** Update local state w/curr state of input elem */
     function handleChange(evt) {
-        const { value } = evt.target;
-        setFormData({ searchField: value });
+        setFormData(evt.target.value);
     }
+
     function handleSubmit(evt) {
         evt.preventDefault();
-        search(formData.searchField);
-        setFormData({searchField: ''});
+        search(formData);
+        setFormData("");
     }
 
     return (
         <form onSubmit={handleSubmit}>
             <input id="search-field"
-                name="searchField"
-                value={FormData.searchField}
+                value={formData}
                 onChange={handleChange} />
             <button>Search</button>
         </form>

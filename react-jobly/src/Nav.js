@@ -1,12 +1,9 @@
 import React from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 /**
- * Component serving links
+ * Component serving navigation links
  *
- * Props:
- * -
- * TODO:DOCSTRING
  */
 function Nav() {
   return (

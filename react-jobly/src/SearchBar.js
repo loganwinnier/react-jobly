@@ -1,17 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+
 
 /** Search Form Component
- * 
- * State: 
+ *
+ * State:
  * formData: data from search form
- * 
- * Props: 
- * -search: a function for searching 
- * 
+ *
+ * Props:
+ * -search: a function for searching the appropriate data (ie jobs or companies)
+ *
  * CompanyPage, JobPage --> SearchBar
  */
 function SearchBar({ search }) {
-    const [formData, setFormData] = useState();
+    const [formData, setFormData] = useState({searchField: ''});
+    console.log('FORM DATA=', formData)
+
+    useEffect(function getCompanies() {
+        search(formData.searchField);
+      }, [formData]);
 
     /** Update local state w/curr state of input elem */
     function handleChange(evt) {
@@ -21,6 +27,7 @@ function SearchBar({ search }) {
     function handleSubmit(evt) {
         evt.preventDefault();
         search(formData.searchField);
+        setFormData({searchField: ''});
     }
 
     return (

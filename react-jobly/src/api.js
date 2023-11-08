@@ -65,9 +65,9 @@ class JoblyApi {
   /** Get  List of companies
    * optional parameter term to filter search by name
    */
-
   static async getCompanies(term = null) {
-    let res = await this.request(`companies${ term ? '?nameLike=' + term : "" }`);
+
+    let res = await this.request('companies', term ? {nameLike: term}: "");
     return res.companies;
   }
 

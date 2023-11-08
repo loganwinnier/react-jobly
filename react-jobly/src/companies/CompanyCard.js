@@ -6,15 +6,23 @@ import React from "react";
  Props:
  - company, an object {"name": "Davis-Davis",
       "description": "Career participant difficult", "logoUrl": null
-	}
+  }
  * CompanyList --> CompanyCard
  */
-function CompanyCard({company}) {
+function CompanyCard({ company }) {
 
   return (
-    <div>
+    <div style={{
+      border: "2px solid black",
+      margin: "1em",
+      backgroundColor: "tan"
+    }}>
       <h4>{company.name}</h4>
-      <img src={`/${company.logoUrl}`}></img>
+      {company.logoUrl
+        ?
+        <img src={`./${ company.logoUrl }`} width="50px" />
+        : ""
+      }
       <p>{company.description}</p>
     </div>
   );

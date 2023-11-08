@@ -7,7 +7,9 @@ import RouteList from './RouteList';
 
 
 /**
- * TODO:DOCSTRINGs
+ * Renders RouteList and Nav bar
+ * 
+ * Index -> App -> RouteList, Nav
  */
 function App() {
   return (

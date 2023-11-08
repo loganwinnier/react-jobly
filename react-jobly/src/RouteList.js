@@ -1,22 +1,25 @@
 import React from "react";
 import { Route, Routes } from 'react-router-dom';
 
-import CompaniesPage from './companies/CompaniesPage';
+import CompanyPage from './companies/CompanyPage';
 import CompanyDetailsPage from './companies/CompanyDetailsPage';
-import JobsPage from "./JobsPage";
+import JobPage from "./JobPage";
 import Homepage from "./Homepage";
 
 
-//TODO:DOCSTRING
+/** Setup for Route components Routes 
+ * 
+ * 
+ * App -> RouteList -> CompanyPage, CompanyDetailsPage,  JobPage, Homepage
+ */
 function RouteList() {
   return (
-    // TODO: put paths before elements
-    // TODO: add asterisk fallback & Not found component
     <Routes>
-      <Route element={<CompaniesPage />} path="/companies" />
-      <Route element={<CompanyDetailsPage />} path="/company/:handle" />
-      <Route element={<JobsPage />} path="/jobs" />
-      <Route element={<Homepage />} path="/" />
+      <Route path="/companies" element={<CompanyPage />} />
+      <Route path="/company/:handle" element={<CompanyDetailsPage />} />
+      <Route path="/jobs" element={<JobPage />} />
+      <Route path="/" element={<Homepage />} />
+      <Route path="*" element={<h2>Not Found</h2>} />
     </Routes>
   );
 }

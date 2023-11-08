@@ -1,17 +1,21 @@
 import React, { useState } from "react";
-
+import CompanyCard from "./CompanyCard";
 
 /**
- *TODO:DOCSTRING
+ * Presentation component, shows list of multiple companies
  *
+ Props:
+ - company, an object {"name": "Davis-Davis",
+      "description": "Career participant difficult", "logoUrl": null
+  }
+ * CompanyPage -> CompanyList --> CompanyCard
  */
-function CompaniesList() {
+function CompanyList({ companies }) {
   return (
     <div>
-      This is the companies list
+      {companies.map(comp => <CompanyCard key={comp.handle} company={comp} />)}
     </div>
   );
-
 }
 
-export default CompaniesList;
+export default CompanyList;

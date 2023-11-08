@@ -17,9 +17,9 @@ class JoblyApi {
     "FtrMwBQwe6Ue-glIFgz_Nf8XxRT2YecFCiSpYL0fCXc";
 
   static async request(endpoint, data = {}, method = "GET") {
-    const url = new URL(`${BASE_URL}/${endpoint}`);
+    const url = new URL(`${ BASE_URL }/${ endpoint }`);
     const headers = {
-      authorization: `Bearer ${JoblyApi.token}`,
+      authorization: `Bearer ${ JoblyApi.token }`,
       'content-type': 'application/json',
     };
 
@@ -39,11 +39,11 @@ class JoblyApi {
       console.error("API Error:", resp.statusText, resp.status);
       const { error } = await resp.json();
 
-      if(Array.isArray(error.message)){
+      if (Array.isArray(error.message)) {
         throw error.message;
       }
-      else{
-        console.log(error.message)
+      else {
+        console.log(error.message);
         throw [error.message];
       }
 
@@ -57,8 +57,18 @@ class JoblyApi {
   /** Get details on a company by handle. */
 
   static async getCompany(handle) {
-    let res = await this.request(`companies/${handle}`);
+    let res = await this.request(`companies/${ handle }`);
     return res.company;
+  }
+
+
+  /** Get  List of companies
+   * optional parameter term to filter search by name
+   */
+
+  static async getCompanies(term = null) {
+    let res = await this.request(`companies${ term ? '?nameLike=' + term : "" }`);
+    return res.companies;
   }
 
   // obviously, you'll add a lot here ...
@@ -66,3 +76,5 @@ class JoblyApi {
 
 
 }
+
+export default JoblyApi;

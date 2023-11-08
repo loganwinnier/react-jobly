@@ -39,14 +39,14 @@ class JoblyApi {
       console.error("API Error:", resp.statusText, resp.status);
       const { error } = await resp.json();
 
-      if( Array.isArray(error.message)){
+      if(Array.isArray(error.message)){
         throw error.message;
       }
       else{
         console.log(error.message)
         throw [error.message];
       }
-      
+
     }
 
     return await resp.json();
@@ -62,4 +62,7 @@ class JoblyApi {
   }
 
   // obviously, you'll add a lot here ...
+  // good luck.
+
+
 }

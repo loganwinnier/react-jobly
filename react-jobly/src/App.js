@@ -1,9 +1,10 @@
 import { BrowserRouter } from 'react-router-dom';
-
+import { useState } from 'react';
 import './App.css';
 import Nav from './Nav';
 import RouteList from './RouteList';
 import userContext from "./userContext";
+import JoblyApi from './api';
 
 
 
@@ -20,16 +21,28 @@ function App() {
 
   const [user, setUser] = useState(null);
 
+  console.log(user);
   /** Register a new user and update user state */
   async function register(formData) {
-    const newUser = await JoblyApi.registerUser(formData);
-    setUser(newUser);
+    try {
+      const userToken = await JoblyApi.registerUser(formData);
+      setUser({ userToken, username: formData.username });
+      return true;
+    } catch (err) {
+      return err;
+    }
   }
 
   /** Login an existing user and update user state*/
   async function login(formData) {
-    const loggedInUser = await JoblyApi.loginUser(formData);
-    setUser(loggedInUser);
+    try {
+      const userToken = await JoblyApi.loginUser(formData);
+      setUser({ userToken, username: formData.username });
+      return true;
+    }
+    catch (err) {
+      return err;
+    }
   }
 
   /** Update profile information for existing user and update state */
@@ -46,10 +59,10 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-      <userContext.Provider value={user}>
-        <Nav logout={logout}/>
-        <RouteList register={register} login={login} update={update}/>
-      </userContext.Provider>
+        <userContext.Provider value={user}>
+          <Nav logout={logout} />
+          <RouteList register={register} login={login} update={update} />
+        </userContext.Provider>
       </BrowserRouter>
     </div>
   );

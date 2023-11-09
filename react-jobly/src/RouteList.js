@@ -28,18 +28,12 @@ function RouteList({ register, login, update }) {
   return (
     <Routes>
       <Route path="/" element={<Homepage />} />
-      {user ?
-        <>
-          <Route path="/profile" element={<ProfileForm update={update} />} />
-          <Route path="/jobs" element={<JobPage />} />
-          <Route path="/companies" element={<CompanyPage />} />
-          <Route path="/companies/:handle" element={<CompanyDetailsPage />} />
-        </>
-        :
-        <>
-          <Route path="/register" element={<RegisterForm register={register}/>} />
-          <Route path="/login" element={<LoginForm login={login} />} />
-        </>}
+      <Route path="/profile" element={<ProfileForm update={update} />} />
+      <Route path="/jobs" element={<JobPage />} />
+      <Route path="/companies" element={<CompanyPage />} />
+      <Route path="/companies/:handle" element={<CompanyDetailsPage />} />
+      <Route path="/signup" element={<RegisterForm register={register} />} />
+      <Route path="/login" element={<LoginForm login={login} />} />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );

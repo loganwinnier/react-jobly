@@ -1,5 +1,8 @@
 import React, { useState, useContext } from "react";
 import userContext from "../userContext";
+import { Navigate, useNavigate } from 'react-router-dom';
+import Alert from '../Alert';
+import { v4 as uuid } from "uuid";
 
 /** Login Form Component
  *
@@ -11,11 +14,14 @@ import userContext from "../userContext";
  *
  * RouteList --> LoginForm --> Alert
  */
-function LoginForm( { login }) {
+function LoginForm({ login }) {
 
   const [formData, setFormData] = useState("");
-
+  const [error, setError] = useState(null);
   const user = useContext(userContext);
+  const navigate = useNavigate();
+
+
 
   /** Update local state w/curr state of input elem */
   function handleChange(evt) {
@@ -25,21 +31,37 @@ function LoginForm( { login }) {
       [name]: value,
     }));
   }
-
-  function handleSubmit(evt) {
-      evt.preventDefault();
-      const trimmedFormData = formData.trim();
-      login(trimmedFormData);
-      setFormData(trimmedFormData);
+  /** handleSubmit: attempts to log in and redirect to homepage
+   * if failed set error state*/
+  async function handleSubmit(evt) {
+    evt.preventDefault();
+    const loggedIn = await login(formData);
+    console.log(loggedIn);
+    if (!Array.isArray(loggedIn)) return navigate("/");
+    setError(loggedIn);
   }
 
+  if (user) return <Navigate to="/" />;
+
   return (
-      <form onSubmit={handleSubmit}>
-          <input id="login-field"
-              value={formData}
-              onChange={handleChange} />
-          <button>login</button>
-      </form>
+    < form onSubmit={handleSubmit} >
+      {(error && <Alert error={error[0]} />)}
+      <label htmlFor="username">Username</label>
+      <input
+        id="username"
+        name="username"
+        value={formData.username}
+        onChange={handleChange}
+      />
+      <label htmlFor="password">Password</label>
+      <input
+        id="password"
+        name="password"
+        value={formData.password}
+        onChange={handleChange}
+      />
+      <button>login</button>
+    </form >
   );
 }
 

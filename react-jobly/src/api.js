@@ -63,20 +63,19 @@ class JoblyApi {
     return res.token;
   }
 
-   /** Login an existing user
-   * Returns a string token  */
-   static async loginUser(formData) {
-
-    let res = await this.request('auth/login', formData, 'POST');
+  /** Login an existing user
+  * Returns a string token  */
+  static async loginUser(formData) {
+    let res = await this.request('auth/token', formData, 'POST');
 
     return res.token;
   }
 
-   /** Update an existing user profile information
-   * Returns a string token  */
-   static async updateUser(formData) {
+  /** Update an existing user profile information
+  * Returns a string token  */
+  static async updateUser(formData) {
 
-    let res = await this.request(`users/${username}`, formData, 'PATCH');
+    let res = await this.request(`/users/${ formData.username }`, formData, 'PATCH');
 
     return res.user;
   }

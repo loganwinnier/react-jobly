@@ -16,21 +16,21 @@ function Nav({ logout }) {
   return (
     <nav>
       <Link to='/'> Homepage </Link>
-      { user?
-      <>
-        <Link to='/companies'> Companies </Link>
-        <Link to='/jobs'> Jobs </Link>
-        <Link to='/profile'> Profile </Link>
-        <Link onClick={logout}> Logout {user.username} </Link>
-      </>
-      :
-      <>
-        <Link to='/signup'> Signup </Link>
-        <Link to='/login'> Login </Link>
-      </>
+      {user ?
+        <>
+          <Link to='/companies'> Companies </Link>
+          <Link to='/jobs'> Jobs </Link>
+          <Link to='/profile'> Profile </Link>
+          <Link to='/' onClick={logout}> Logout {user.username} </Link>
+        </>
+        :
+        <>
+          <Link to='/signup'> Signup </Link>
+          <Link to='/login'> Login </Link>
+        </>
       }
     </nav>
-  )
+  );
 }
 
 export default Nav;

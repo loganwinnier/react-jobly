@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import userContext from './userContext';
+
 
 
 /** Display Component Renders Homepage
@@ -6,9 +8,13 @@ import React from 'react';
  * RoutesList -> Homepage
  */
 function Homepage() {
+
+  const user = useContext(userContext);
+
   return (
     <div>
       <h2>All the jobs. In one convenient place.</h2>
+      {user && <h4>Welcome back {user.username}</h4>}
     </div>
   );
 }

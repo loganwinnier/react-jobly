@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import JobList from "./JobList";
 import SearchBar from "../SearchBar";
 import JoblyApi from "../api";
+import LoadingSpinner from "../LoadingSpinner";
 
 /**
  * Logic component for jobs route
@@ -27,9 +28,8 @@ function JobPage() {
     setJobs(jobArray);
   };
 
-  if (!jobs) return <h2>Loading jobs...</h2>;
-  // TODO: loading spinner component
-  // TODO: if companies.length = 0 message
+  if (!jobs) return <LoadingSpinner title="Jobs" />;
+  if (!jobs.length) return <h2>No Jobs Found</h2>;
   return (
     <div>
       <SearchBar search={fetchJobs} />

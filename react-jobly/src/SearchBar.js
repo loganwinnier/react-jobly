@@ -20,12 +20,11 @@ function SearchBar({ search }) {
         setFormData(evt.target.value);
     }
 
-    //TODO: handle whitespace here
-    // dont wipe form data, set to cleaned up non whitespace version
     function handleSubmit(evt) {
         evt.preventDefault();
-        search(formData);
-        setFormData("");
+        const trimmedFormData = formData.trim();
+        search(trimmedFormData);
+        setFormData(trimmedFormData);
     }
 
     return (

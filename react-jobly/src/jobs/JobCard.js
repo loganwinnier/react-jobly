@@ -8,9 +8,9 @@ import React from "react";
                  companyHandle: "dogelectric", companyName: "Dog Electric"}
  * JobList --> JobCard
  */
-// TODO: format salary
-// TODO: only display equity / salary if they exist
+
 function JobCard({ job }) {
+  const salary = new Intl.NumberFormat().format(job.salary);
   return (
     <div style={{
       border: "2px solid black",
@@ -19,8 +19,8 @@ function JobCard({ job }) {
     }}>
       <h4>{job.title}</h4>
       <p>{job.companyName}</p>
-      <p>Salary: {job.salary}</p>
-      <p>Equity: {job.equity}</p>
+      <p>{job.salary ? `Salary: $${ salary }` : "No Salary Listed"}</p>
+      <p>{job.equity ? `Equity: ${ (job.equity * 200).toFixed(1) }%` : "No Equity Listed"}</p>
     </div>
   );
 

@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import JoblyApi from "../api";
 import JobList from "../jobs/JobList";
+import NotFoundPage from "../NotFoundPage";
+import LoadingSpinner from "../LoadingSpinner";
 
 
 /**
@@ -9,30 +11,33 @@ import JobList from "../jobs/JobList";
  *
  * State:
  * - company, object {"name": "Davis", "description": "descn", "logoUrl": null}
+ * - error, array [{error}, {error}, ...]
  *
  * RoutesList ---> CompanyDetailsPage ---> JobList
  */
 function CompanyDetailsPage() {
 
   const [company, setCompany] = useState(null);
+  const [error, setError] = useState([]);
   const { handle } = useParams();
 
   useEffect(function getCompanyWhenMounted() {
     async function fetchCompany() {
-      // TODO: try catch
-      // new errors state []
-      // update state with errs in catch
-      // show 404 component or string for now
-
-      const company = await JoblyApi.getCompany(handle);
-      setCompany(company);
+      try {
+        const company = await JoblyApi.getCompany(handle);
+        setCompany(company);
+      }
+      catch (err) {
+        setError(err);
+      }
     }
     fetchCompany();
-  }, []);
+  }, [handle]);
 
 
-  if (!company) return <h2>Loading Company...</h2>;
-  // TODO: return errors maybe
+  if (error.length) return <NotFoundPage />;
+
+  if (!company) return <h2><LoadingSpinner title="company" /></h2>;
 
   return (
     <div>
@@ -50,4 +55,4 @@ function CompanyDetailsPage() {
 
 }
 
-export default CompanyDetailsPage;
+export default CompanyDetailsPage;;;

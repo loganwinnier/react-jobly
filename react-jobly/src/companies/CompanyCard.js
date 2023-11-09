@@ -12,24 +12,22 @@ import { Link } from "react-router-dom";
  */
 function CompanyCard({ company }) {
 
-  // TODO: move styling out
-  // TODO: conditional for company logo different
- return (
-  <Link to={`/companies/${company.handle}`}>
-    <div style={{
-      border: "2px solid black",
-      margin: "1em",
-      backgroundColor: "tan"
-    }}>
-      <h4>{company.name}</h4>
-      {company.logoUrl
-        ?
-        <img src={`./${ company.logoUrl }`} width="50px" />
-        : ""
-      }
-      <p>{company.description}</p>
-    </div>
-  </Link>
+  return (
+    <Link to={`/companies/${ company.handle }`}>
+      <div style={{
+        border: "2px solid black",
+        margin: "1em",
+        backgroundColor: "tan"
+      }}>
+        <h4>{company.name}</h4>
+        {company.logoUrl && <img
+          src={`./${ company.logoUrl }`}
+          width="50px"
+          alt={`${ company.name } logo`} />}
+
+        <p>{company.description}</p>
+      </div>
+    </Link>
   );
 
 }

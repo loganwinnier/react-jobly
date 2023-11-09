@@ -57,12 +57,10 @@ class JoblyApi {
   /** Get list of companies
    * optional parameter term to filter search by name
    */
-  // TODO: move trim
+
   static async getCompanies(term) {
 
-    if (term) term = term.trim();
-
-    let res = await this.request('companies', term ? {nameLike: term}: "");
+    let res = await this.request('companies', term ? { nameLike: term } : "");
     return res.companies;
   }
 
@@ -74,19 +72,16 @@ class JoblyApi {
   }
 
 
-   /** Get list of jobs
-   * optional parameter term to filter search by name
-   */  // TODO: move trim
-    static async getJobs(term) {
+  /** Get list of jobs
+  * optional parameter term to filter search by name*/
+  static async getJobs(term) {
 
-      if (term) term = term.trim();
-
-      let res = await this.request('jobs', term ? {title: term}: "");
-      return res.jobs;
-    }
+    let res = await this.request('jobs', term ? { title: term } : "");
+    return res.jobs;
+  }
 
 
-    // obviously, you'll add a lot here ...
+  // obviously, you'll add a lot here ...
 
 }
 

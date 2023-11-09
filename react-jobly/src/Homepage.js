@@ -1,18 +1,17 @@
-import React from 'react'
+import React from 'react';
 
 
-/**
- * TODO: docstring
+/** Display Component Renders Homepage
+ * 
+ * RoutesList -> Homepage
  */
 function Homepage() {
   return (
     <div>
-     <h2>All the jobs. In one convenient place.</h2>
+      <h2>All the jobs. In one convenient place.</h2>
     </div>
-  )
+  );
 }
 
 
 export default Homepage;
-
-//TODO: src folder organization

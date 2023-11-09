@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import CompanyList from "./CompanyList";
 import SearchBar from "../SearchBar";
 import JoblyApi from "../api";
+import LoadingSpinner from "../LoadingSpinner";
 
 /**
  * Logic component for companies route
@@ -26,9 +27,8 @@ function CompanyPage() {
     setCompanies(companyArray);
   };
 
-  // TODO: loading spinner component
-  if (!companies) return <h2>Loading Companies...</h2>;
-  // TODO: if companies.length = 0 message
+  if (!companies) return <LoadingSpinner title={"companies"} />;
+  if (!companies.length) return <h2>No Companies Found</h2>;
   return (
     <div>
       <SearchBar search={fetchCompanies} />
@@ -38,4 +38,4 @@ function CompanyPage() {
 
 }
 
-export default CompanyPage;
+export default CompanyPage;;

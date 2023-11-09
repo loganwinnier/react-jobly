@@ -9,22 +9,19 @@ import React, { useState, useEffect } from "react";
  * Props:
  * -search: a function for searching the appropriate data (ie jobs or companies)
  *
- * CompanyPage, JobPage --> SearchBar
+ * {CompanyPage, JobPage} --> SearchBar
  */
 function SearchBar({ search }) {
-    console.log("rerender");
-    const [formData, setFormData] = useState("");
-    console.log('FORM DATA=', formData);
 
-    useEffect(function reRender() {
-        return function cleanUp() { console.log("cleaned up"); };
-    }, []);
+    const [formData, setFormData] = useState("");
 
     /** Update local state w/curr state of input elem */
     function handleChange(evt) {
         setFormData(evt.target.value);
     }
 
+    //TODO: handle whitespace here
+    // dont wipe form data, set to cleaned up non whitespace version
     function handleSubmit(evt) {
         evt.preventDefault();
         search(formData);

@@ -10,10 +10,9 @@ import JoblyApi from "../api";
  * Also renders a SearchBar component
  *
  * State:
- * - companies: A array of company objects Like: [{company}, {company}] and loading status
- * 
+ * - companies: A array of company objects Like: [{company}, {company}] *
  *
- * RoutesList -> CompanyPage -> CompanyList & SearchBar
+ * RoutesList -> CompanyPage -> {CompanyList & SearchBar}
  */
 function CompanyPage() {
   const [companies, setCompanies] = useState(null);
@@ -22,20 +21,17 @@ function CompanyPage() {
     fetchCompanies();
   }, []);
 
-  async function fetchCompanies(term = null) {
+  async function fetchCompanies(term) {
     const companyArray = await JoblyApi.getCompanies(term);
     setCompanies(companyArray);
   };
 
-  function search(term) {
-    fetchCompanies(term);
-  }
-
+  // TODO: loading spinner component
   if (!companies) return <h2>Loading Companies...</h2>;
-
+  // TODO: if companies.length = 0 message
   return (
     <div>
-      <SearchBar search={search} />
+      <SearchBar search={fetchCompanies} />
       <CompanyList companies={companies} />
     </div>
   );

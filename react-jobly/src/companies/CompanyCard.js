@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 /**
  * Presentation component, shows info about a single company
@@ -11,7 +12,10 @@ import React from "react";
  */
 function CompanyCard({ company }) {
 
-  return (
+  // TODO: move styling out
+  // TODO: conditional for company logo different
+ return (
+  <Link to={`/companies/${company.handle}`}>
     <div style={{
       border: "2px solid black",
       margin: "1em",
@@ -25,6 +29,7 @@ function CompanyCard({ company }) {
       }
       <p>{company.description}</p>
     </div>
+  </Link>
   );
 
 }

@@ -54,6 +54,18 @@ class JoblyApi {
 
   // Individual API routes
 
+  /** Get list of companies
+   * optional parameter term to filter search by name
+   */
+  // TODO: move trim
+  static async getCompanies(term) {
+
+    if (term) term = term.trim();
+
+    let res = await this.request('companies', term ? {nameLike: term}: "");
+    return res.companies;
+  }
+
   /** Get details on a company by handle. */
 
   static async getCompany(handle) {
@@ -62,18 +74,19 @@ class JoblyApi {
   }
 
 
-  /** Get  List of companies
+   /** Get list of jobs
    * optional parameter term to filter search by name
-   */
-  static async getCompanies(term = null) {
+   */  // TODO: move trim
+    static async getJobs(term) {
 
-    let res = await this.request('companies', term ? {nameLike: term}: "");
-    return res.companies;
-  }
+      if (term) term = term.trim();
 
-  // obviously, you'll add a lot here ...
-  // good luck.
+      let res = await this.request('jobs', term ? {title: term}: "");
+      return res.jobs;
+    }
 
+
+    // obviously, you'll add a lot here ...
 
 }
 

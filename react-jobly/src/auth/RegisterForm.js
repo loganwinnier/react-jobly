@@ -3,6 +3,14 @@ import userContext from "../userContext";
 import Alert from "../Alert";
 import { Navigate, useNavigate } from "react-router-dom";
 
+const initialFormData = {
+  username: "" ,
+  password: "",
+  firstName: "" ,
+  lastName: "",
+  email: ""
+}
+
 /** register Form Component
  *
  * State:
@@ -14,7 +22,7 @@ import { Navigate, useNavigate } from "react-router-dom";
  */
 function RegisterForm({ register }) {
 
-  const [formData, setFormData] = useState("");
+  const [formData, setFormData] = useState(initialFormData);
   const [errors, setErrors] = useState(null);
   const navigate = useNavigate();
 

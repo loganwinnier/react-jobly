@@ -12,9 +12,9 @@ class JoblyApi {
   // Remember, the backend needs to be authorized with a token
   // We're providing a token you can use to interact with the backend API
   // DON'T MODIFY THIS TOKEN
-  static token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZ" +
-    "SI6InRlc3R1c2VyIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTU5ODE1OTI1OX0." +
-    "FtrMwBQwe6Ue-glIFgz_Nf8XxRT2YecFCiSpYL0fCXc";
+  // static token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZ" +
+  //   "SI6InRlc3R1c2VyIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTU5ODE1OTI1OX0." +
+  //   "FtrMwBQwe6Ue-glIFgz_Nf8XxRT2YecFCiSpYL0fCXc";
 
   static async request(endpoint, data = {}, method = "GET") {
     const url = new URL(`${ BASE_URL }/${ endpoint }`);
@@ -77,6 +77,17 @@ class JoblyApi {
 
     let res = await this.request(`/users/${ formData.username }`, formData, 'PATCH');
 
+    return res.user;
+  }
+
+   /** Get details on a user by username.
+    * Returns an object {username: 'testuser', firstName: 'Test',
+    * lastName: 'User', email: 'joel@joelburton.com', isAdmin: false}
+   */
+
+   static async getUser(username) {
+    let res = await this.request(`users/${ username }`);
+    //console.log('RES USER', res.user)
     return res.user;
   }
 

@@ -2,7 +2,11 @@ import React, { useState, useContext } from "react";
 import userContext from "../userContext";
 import { Navigate, useNavigate } from 'react-router-dom';
 import Alert from '../Alert';
-import { v4 as uuid } from "uuid";
+
+const initialFormData = {
+  username: "" ,
+  password: ""
+}
 
 /** Login Form Component
  *
@@ -16,7 +20,7 @@ import { v4 as uuid } from "uuid";
  */
 function LoginForm({ login }) {
 
-  const [formData, setFormData] = useState("");
+  const [formData, setFormData] = useState(initialFormData);
   const [error, setError] = useState(null);
   const user = useContext(userContext);
   const navigate = useNavigate();

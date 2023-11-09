@@ -4,7 +4,7 @@ import userContext from './userContext';
 
 
 /** Display Component Renders Homepage
- * 
+ *
  * RoutesList -> Homepage
  */
 function Homepage() {
@@ -14,7 +14,7 @@ function Homepage() {
   return (
     <div>
       <h2>All the jobs. In one convenient place.</h2>
-      {user && <h4>Welcome back {user.username}</h4>}
+      {user && <h4>Welcome back {user.firstName}</h4>}
     </div>
   );
 }

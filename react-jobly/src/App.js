@@ -13,10 +13,11 @@ import JoblyApi from './api';
  * Renders RouteList and Nav bar
  *
  * State:
- * - user / user context
- * - token / token context
+ * - token / string, updated with a useEffect
+ * - user /  object populated by using token to call getUser api
+ *  {username: "test" , password: "pw", firstName: "t" , lastName: "t", email: "t@t"}}
  *
- * Index -> App -> RouteList, Nav
+ * Index -> App -> {RouteList, Nav}
  */
 function App() {
 
@@ -32,20 +33,25 @@ function App() {
      * updates when token changes, sets user back to null
      */
     async function getUserInfo() {
+      // move this into if statement
       JoblyApi.token = token;
 
       if (token) {
+        // TODO destructure here instead
         const decoded = jwtDecode(token);
+        // TODO: try catch here, if failed send error message
         const userInfo = await JoblyApi.getUser(decoded.username);
         setUser(userInfo);
       }
       else { setUser(null); };
     }
+    // handle errors
     getUserInfo();
   }, [token]);
 
 
   /** Register a new user and update user state */
+  // TODO: move error handling to Register component
   async function register(formData) {
     try {
       const userToken = await JoblyApi.registerUser(formData);
@@ -57,6 +63,7 @@ function App() {
   }
 
   /** Login an existing user and update user state*/
+  // TODO: move error handling to Login component
   async function login(formData) {
     try {
       const userToken = await JoblyApi.loginUser(formData);

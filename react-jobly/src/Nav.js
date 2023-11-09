@@ -8,11 +8,14 @@ import userContext from "./userContext";
  * Props:
  * - logout function
  *
+ * App --> Nav
  */
 function Nav({ logout }) {
 
   const user = useContext(userContext);
 
+  // TODO:make separate functions that return the JSX for user nav routes and not
+  // then use those in the ternary
   return (
     <nav>
       <Link to='/'> Homepage </Link>

@@ -14,7 +14,7 @@ const initialFormData = {
  * formData: data from login form
  *
  * Props:
- * -login: a function for logining
+ * -login: a function for logining in existing users
  *
  * RouteList --> LoginForm --> Alert
  */
@@ -22,9 +22,9 @@ function LoginForm({ login }) {
 
   const [formData, setFormData] = useState(initialFormData);
   const [error, setError] = useState(null);
+
   const user = useContext(userContext);
   const navigate = useNavigate();
-
 
 
   /** Update local state w/curr state of input elem */
@@ -40,11 +40,14 @@ function LoginForm({ login }) {
   async function handleSubmit(evt) {
     evt.preventDefault();
     const loggedIn = await login(formData);
-    console.log(loggedIn);
+    // do try catch here
+
     if (!Array.isArray(loggedIn)) return navigate("/");
+    // put this in the catch block w err instead of loggedIn
     setError(loggedIn);
   }
 
+  // this will be handled in later step
   if (user) return <Navigate to="/" />;
 
   return (

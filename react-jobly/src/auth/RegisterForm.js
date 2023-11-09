@@ -17,7 +17,8 @@ const initialFormData = {
  * formData: data from registration form
  *
  * Props:
- * -register: a function for
+ * -register: a function for registering new users
+ *
  * RouteList --> RegisterForm --> Alert
  */
 function RegisterForm({ register }) {
@@ -41,14 +42,18 @@ function RegisterForm({ register }) {
    * if failed set error state*/
   async function handleSubmit(evt) {
     evt.preventDefault();
+    // TODO: put try catch here
     const success = await register(formData);
-    console.log(success);
+
     if (!Array.isArray(success)) return navigate("/");
+    // put this in the catch block w err instead of success
     setErrors(success);
   }
 
+  // this will be handled in later step
   if (user) return <Navigate to="/" />;
 
+  // TODO: remove map here after modifying Alert component
   return (
     < form onSubmit={handleSubmit} style={{
       display: "flex",

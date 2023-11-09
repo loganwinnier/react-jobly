@@ -54,6 +54,35 @@ class JoblyApi {
 
   // Individual API routes
 
+  /** Register a new user
+   * Returns a string token  */
+  static async registerUser(formData) {
+
+    let res = await this.request('auth/register', formData, 'POST');
+
+    return res.token;
+  }
+
+   /** Login an existing user
+   * Returns a string token  */
+   static async loginUser(formData) {
+
+    let res = await this.request('auth/login', formData, 'POST');
+
+    return res.token;
+  }
+
+   /** Update an existing user profile information
+   * Returns a string token  */
+   static async updateUser(formData) {
+
+    let res = await this.request(`users/${username}`, formData, 'PATCH');
+
+    return res.user;
+  }
+
+
+
   /** Get list of companies
    * optional parameter term to filter search by name
    */

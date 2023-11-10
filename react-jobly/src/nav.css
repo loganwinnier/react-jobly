@@ -3,9 +3,10 @@
   align-items: center;
   background-color: #8C4C3E;
 
-  border-radius: 2px;
   width: 70vw;
   margin: auto;
+  border: 2px solid rgba(0, 0, 0, 0.119);
+  filter: drop-shadow(2px 5px 2px rgba(0, 0, 0, 0.147));
 }
 
 .link {

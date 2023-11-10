@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import CompanyCard from "./CompanyCard";
 
 /**
@@ -9,10 +10,17 @@ import CompanyCard from "./CompanyCard";
   }
  * CompanyPage -> CompanyList --> CompanyCard
  */
-function CompanyList({ companies }) {
+function CompanyList({ companies, showMore, showPrevious }) {
+  let showButton = true;
+
+  function handleClick() {
+    showButton = showMore();
+  }
+
   return (
     <div>
       {companies.map(comp => <CompanyCard key={comp.handle} company={comp} />)}
+      {showButton && <button onClick={handleClick}>Show More</button>}
     </div>
   );
 }

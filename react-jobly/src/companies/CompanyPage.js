@@ -18,8 +18,8 @@ import userContext from "../userContext";
  */
 function CompanyPage() {
   const [companies, setCompanies] = useState(null);
+  const [shown, setShown] = useState([0, 5]);
   const user = useContext(userContext);
-
   useEffect(function getCompaniesWhenMounted() {
     fetchCompanies();
   }, [user]);
@@ -29,12 +29,29 @@ function CompanyPage() {
     setCompanies(companyArray);
   };
 
+  function showMore() {
+    if (shown[1] < companies.length) {
+      setShown(show => [show[0] + 5, show[1] + 5]);
+    }
+    return shown[1] >= companies.length;
+  }
+
+  function showPrevious() {
+    if (shown[1] <= companies.length) {
+      setShown(show => [show[0] - 5, show[1] - 5]);
+      console.log(shown);
+    }
+  }
+
+
   if (!companies) return <LoadingSpinner title={"companies"} />;
   if (!companies.length) return <h2>No Companies Found</h2>;
   return (
     <div>
       <SearchBar search={fetchCompanies} />
-      <CompanyList companies={companies} />
+      <CompanyList
+        companies={companies.slice(shown[0], shown[1])}
+        showMore={showMore} showPrevious={showPrevious} />
     </div>
   );
 

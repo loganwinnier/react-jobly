@@ -15,6 +15,7 @@ function SearchBar({ search }) {
 
     const [formData, setFormData] = useState("");
     console.log(formData);
+
     useEffect(() => {
         search(formData);
     }, [formData]);
@@ -23,8 +24,6 @@ function SearchBar({ search }) {
     function handleChange(evt) {
         setFormData(evt.target.value);
     };
-
-
 
     function handleSubmit(evt) {
         evt.preventDefault();

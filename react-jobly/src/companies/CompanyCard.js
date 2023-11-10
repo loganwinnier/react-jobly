@@ -18,8 +18,8 @@ function CompanyCard({ company }) {
   const b = randomBetween(100, 200);
 
   return (
-    <Link class='link' to={`/companies/${ company.handle }`}>
-      <div class='card cards' style={{ backgroundColor: `rgb(${ r }, ${ g }, ${ b })` }}>
+    <Link className='link' to={`/companies/${ company.handle }`}>
+      <div className='card cards' style={{ backgroundColor: `rgb(${ r }, ${ g }, ${ b })` }}>
         <h4 className="card-title">{company.name}</h4>
         {company.logoUrl && <img className='logo'
           src={`./${ company.logoUrl }`}

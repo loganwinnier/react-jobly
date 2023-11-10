@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
 
 import CompanyPage from './companies/CompanyPage';
 import CompanyDetailsPage from './companies/CompanyDetailsPage';
@@ -22,21 +22,40 @@ import userContext from "./userContext";
  * App -> RouteList -> {CompanyPage, CompanyDetailsPage, JobPage, Homepage}
  */
 function RouteList({ register, login, update }) {
-
   const user = useContext(userContext);
 
-  return (
-    <Routes>
-      <Route path="/" element={<Homepage />} />
-      <Route path="/profile" element={<ProfileForm update={update} />} />
-      <Route path="/jobs" element={<JobPage />} />
-      <Route path="/companies" element={<CompanyPage />} />
-      <Route path="/companies/:handle" element={<CompanyDetailsPage />} />
-      <Route path="/signup" element={<RegisterForm register={register} />} />
-      <Route path="/login" element={<LoginForm login={login} />} />
-      <Route path="*" element={<NotFoundPage />} />
-    </Routes>
-  );
+  /**Routes for anon users */
+  function anonRoutes() {
+    return (
+      <Routes>
+        <Route path="/" element={<Homepage />} />
+        <Route path="/signup" element={<RegisterForm register={register} />} />
+        <Route path="/login" element={<LoginForm login={login} />} />
+        <Route path="*" element={<Navigate to='/' />} />
+      </Routes>
+    );
+  }
+
+
+  /**Routes for logged in users */
+  function loggedInRoutes() {
+    return (
+      <Routes>
+        <Route path="/" element={<Homepage />} />
+        <Route path="/profile" element={<ProfileForm update={update} />} />
+        <Route path="/jobs" element={<JobPage />} />
+        <Route path="/companies" element={<CompanyPage />} />
+        <Route path="/companies/:handle" element={<CompanyDetailsPage />} />
+        <Route path="/signup" element={<RegisterForm register={register} />} />
+        <Route path="/login" element={<LoginForm login={login} />} />
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
+    );
+  }
+
+  return (user ? loggedInRoutes() : anonRoutes());
 }
 
-export default RouteList;
+
+
+export default RouteList;;;

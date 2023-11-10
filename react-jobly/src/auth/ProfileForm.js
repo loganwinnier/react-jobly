@@ -1,5 +1,4 @@
-import React, { useState, useContext } from "react";
-import userContext from "../userContext";
+import React, { useState } from "react";
 
 /** profile Form Component
  *
@@ -11,11 +10,9 @@ import userContext from "../userContext";
  *
  * {CompanyPage, JobPage} --> profileBar
  */
-function ProfileForm( { update }) {
+function ProfileForm({ update }) {
 
   const [formData, setFormData] = useState("");
-
-  const user = useContext(userContext);
 
   /** Update local state w/curr state of input elem */
   function handleChange(evt) {
@@ -27,18 +24,18 @@ function ProfileForm( { update }) {
   }
 
   function handleSubmit(evt) {
-      evt.preventDefault();
-      const trimmedFormData = formData.trim();
-      setFormData(trimmedFormData);
+    evt.preventDefault();
+    const trimmedFormData = formData.trim();
+    setFormData(trimmedFormData);
   }
 
   return (
-      <form onSubmit={handleSubmit}>
-          <input id="profile-field"
-              value={formData}
-              onChange={handleChange} />
-          <button>profile</button>
-      </form>
+    <form onSubmit={handleSubmit}>
+      <input id="profile-field"
+        value={formData}
+        onChange={handleChange} />
+      <button>profile</button>
+    </form>
   );
 }
 

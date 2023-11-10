@@ -7,6 +7,7 @@ import Nav from './Nav';
 import RouteList from './RouteList';
 import userContext from "./userContext";
 import JoblyApi from './api';
+import LoadingSpinner from './LoadingSpinner';
 
 
 /**
@@ -21,11 +22,11 @@ import JoblyApi from './api';
  */
 function App() {
 
-  const [token, setToken] = useState(null);
+  const [token, setToken] = useState(localStorage.getItem('token') || null);
   const [user, setUser] = useState(null);
 
-  console.log('TOKEN=', token)
-  console.log('USER=', user)
+  console.log('TOKEN=', token);
+  console.log('USER=', user);
 
   useEffect(() => {
     /** update JoblyApi class token with current token
@@ -33,51 +34,44 @@ function App() {
      * updates when token changes, sets user back to null
      */
     async function getUserInfo() {
-      // move this into if statement
-      JoblyApi.token = token;
 
       if (token) {
-        // TODO destructure here instead
-        const decoded = jwtDecode(token);
-        // TODO: try catch here, if failed send error message
-        const userInfo = await JoblyApi.getUser(decoded.username);
-        setUser(userInfo);
+        try {
+          const { username } = jwtDecode(token);
+          JoblyApi.token = token;
+          localStorage.setItem('token', JoblyApi.token);
+          const userInfo = await JoblyApi.getUser(username);
+          setUser(userInfo);
+        } catch (err) {
+          console.warn(err);
+          setToken(null);
+        }
       }
-      else { setUser(null); };
-    }
-    // handle errors
+      else {
+        setUser(null);
+        JoblyApi.token = null;
+        localStorage.removeItem('token');
+      };
+    };
     getUserInfo();
   }, [token]);
 
 
   /** Register a new user and update user state */
-  // TODO: move error handling to Register component
-  async function register(formData) {
-    try {
-      const userToken = await JoblyApi.registerUser(formData);
-      setToken(userToken);
-      return true;
-    } catch (err) {
-      return err;
-    }
+  async function register(registerData) {
+    const userToken = await JoblyApi.registerUser(registerData);
+    setToken(userToken);
   }
 
   /** Login an existing user and update user state*/
-  // TODO: move error handling to Login component
-  async function login(formData) {
-    try {
-      const userToken = await JoblyApi.loginUser(formData);
-      setToken(userToken);
-      return true;
-    }
-    catch (err) {
-      return err;
-    }
+  async function login(loginData) {
+    const userToken = await JoblyApi.loginUser(loginData);
+    setToken(userToken);
   }
 
   /** Update profile information for existing user and update state */
-  async function update(formData) {
-    const updatedUser = await JoblyApi.updateUser(formData);
+  async function update(profileData) {
+    const updatedUser = await JoblyApi.updateUser(profileData);
     // maybe rethink this
     setUser(updatedUser);
   }
@@ -86,6 +80,8 @@ function App() {
   function logout() {
     setToken(null);
   }
+
+  if (token && !user) return <LoadingSpinner />;
 
   return (
     <div className="App">

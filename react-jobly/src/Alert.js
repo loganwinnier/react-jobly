@@ -1,18 +1,14 @@
 import React from "react";
-
+import { v4 as uuid } from 'uuid';
 
 /**
  * Component for displaying error messages to user
 */
-//TODO: have this take in an array of error messages
-// add failed/success category for color etc
-function Alert({ error }) {
-    error = error.replace("instance.", "");
+function Alert({ messages, type }) {
+    const color = (type === 'error' ? 'salmon' : 'darkseagreen');
     return (
         <div>
-            <p style={{
-                backgroundColor: 'salmon'
-            }}>{`${ error } :'(`}</p>
+            {messages.map(msg => <p key={uuid()} style={{ backgroundColor: color }}>{`${ msg.replace("instance.", "") } :'(`}</p>)}
         </div>);
 }
 

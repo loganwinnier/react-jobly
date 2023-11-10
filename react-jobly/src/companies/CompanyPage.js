@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import CompanyList from "./CompanyList";
 import SearchBar from "../SearchBar";
 import JoblyApi from "../api";
 import LoadingSpinner from "../LoadingSpinner";
+import userContext from "../userContext";
 
 /**
  * Logic component for companies route
@@ -17,10 +18,11 @@ import LoadingSpinner from "../LoadingSpinner";
  */
 function CompanyPage() {
   const [companies, setCompanies] = useState(null);
+  const user = useContext(userContext);
 
   useEffect(function getCompaniesWhenMounted() {
     fetchCompanies();
-  }, []);
+  }, [user]);
 
   async function fetchCompanies(term) {
     const companyArray = await JoblyApi.getCompanies(term);

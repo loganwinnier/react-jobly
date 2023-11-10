@@ -1,20 +1,20 @@
-import React, { useState, useContext } from "react";
-import userContext from "../userContext";
+import React, { useState } from "react";
 import Alert from "../Alert";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const initialFormData = {
-  username: "" ,
+  username: "",
   password: "",
-  firstName: "" ,
+  firstName: "",
   lastName: "",
   email: ""
-}
+};
 
 /** register Form Component
  *
  * State:
  * formData: data from registration form
+ * errors: null or an array of errors to render
  *
  * Props:
  * -register: a function for registering new users
@@ -26,8 +26,6 @@ function RegisterForm({ register }) {
   const [formData, setFormData] = useState(initialFormData);
   const [errors, setErrors] = useState(null);
   const navigate = useNavigate();
-
-  const user = useContext(userContext);
 
   /** Update local state w/curr state of input elem */
   function handleChange(evt) {
@@ -42,25 +40,22 @@ function RegisterForm({ register }) {
    * if failed set error state*/
   async function handleSubmit(evt) {
     evt.preventDefault();
-    // TODO: put try catch here
-    const success = await register(formData);
-
-    if (!Array.isArray(success)) return navigate("/");
-    // put this in the catch block w err instead of success
-    setErrors(success);
+    try {
+      await register(formData);
+      navigate('/');
+    } catch (err) {
+      console.log(err);
+      setErrors(err);
+    }
   }
 
-  // this will be handled in later step
-  if (user) return <Navigate to="/" />;
-
-  // TODO: remove map here after modifying Alert component
   return (
     < form onSubmit={handleSubmit} style={{
       display: "flex",
       flexDirection: "column",
       margin: "10px 30%"
     }}>
-      {(errors && errors.map(err => <Alert error={err} />))}
+      {(errors && <Alert messages={errors} type='error' />)}
       <label htmlFor="username">Username</label>
       <input
         id="username"
@@ -74,6 +69,7 @@ function RegisterForm({ register }) {
         name="password"
         value={formData.password}
         onChange={handleChange}
+        type="password"
       />
       <label htmlFor="first-name">First Name</label>
       <input
@@ -97,7 +93,7 @@ function RegisterForm({ register }) {
         value={formData.email}
         onChange={handleChange}
       />
-      <button>login</button>
+      <button>Signup</button>
     </form >
   );
 }

@@ -1,17 +1,17 @@
-import React, { useState, useContext } from "react";
-import userContext from "../userContext";
-import { Navigate, useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import Alert from '../Alert';
 
 const initialFormData = {
-  username: "" ,
+  username: "",
   password: ""
-}
+};
 
 /** Login Form Component
  *
  * State:
  * formData: data from login form
+ * errors: null or an array of errors
  *
  * Props:
  * -login: a function for logining in existing users
@@ -21,9 +21,8 @@ const initialFormData = {
 function LoginForm({ login }) {
 
   const [formData, setFormData] = useState(initialFormData);
-  const [error, setError] = useState(null);
+  const [errors, setErrors] = useState(null);
 
-  const user = useContext(userContext);
   const navigate = useNavigate();
 
 
@@ -39,20 +38,18 @@ function LoginForm({ login }) {
    * if failed set error state*/
   async function handleSubmit(evt) {
     evt.preventDefault();
-    const loggedIn = await login(formData);
-    // do try catch here
-
-    if (!Array.isArray(loggedIn)) return navigate("/");
-    // put this in the catch block w err instead of loggedIn
-    setError(loggedIn);
+    try {
+      await login(formData);
+      navigate('/');
+    } catch (err) {
+      console.log(err);
+      setErrors(err);
+    }
   }
-
-  // this will be handled in later step
-  if (user) return <Navigate to="/" />;
 
   return (
     < form onSubmit={handleSubmit} >
-      {(error && <Alert error={error[0]} />)}
+      {(errors && <Alert messages={errors} type='error' />)}
       <label htmlFor="username">Username</label>
       <input
         id="username"
@@ -66,6 +63,7 @@ function LoginForm({ login }) {
         name="password"
         value={formData.password}
         onChange={handleChange}
+        type='password'
       />
       <button>login</button>
     </form >

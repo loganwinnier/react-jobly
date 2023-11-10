@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { debounce } from "lodash";
 
 
 /** Search Form Component
@@ -15,10 +16,14 @@ function SearchBar({ search }) {
 
     const [formData, setFormData] = useState("");
 
+    useEffect(function liveSearch() {
+        search(formData.trim());
+    }, [formData]);
+
     /** Update local state w/curr state of input elem */
     function handleChange(evt) {
-        setFormData(evt.target.value);
-    }
+        debounce( function() {setFormData(evt.target.value)}, 1000);
+    };
 
     function handleSubmit(evt) {
         evt.preventDefault();

@@ -36,7 +36,7 @@ function RegisterForm({ register }) {
     }));
   }
 
-  /** handleSubmit: attempts to log in and redirect to homepage
+  /** handleSubmit: attempts to register a new user and redirect to homepage
    * if failed set error state*/
   async function handleSubmit(evt) {
     evt.preventDefault();

@@ -70,9 +70,9 @@ function App() {
   }
 
   /** Update profile information for existing user and update state */
-  async function update(profileData) {
-    const updatedUser = await JoblyApi.updateUser(profileData);
-    // maybe rethink this
+  async function update(username, profileData) {
+    const updatedUser = await JoblyApi.updateUser(username, profileData);
+    // errors don't get this far
     setUser(updatedUser);
   }
 

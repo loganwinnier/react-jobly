@@ -17,9 +17,9 @@ class JoblyApi {
   //   "FtrMwBQwe6Ue-glIFgz_Nf8XxRT2YecFCiSpYL0fCXc";
 
   static async request(endpoint, data = {}, method = "GET") {
-    const url = new URL(`${ BASE_URL }/${ endpoint }`);
+    const url = new URL(`${BASE_URL}/${endpoint}`);
     const headers = {
-      authorization: `Bearer ${ JoblyApi.token }`,
+      authorization: `Bearer ${JoblyApi.token}`,
       'content-type': 'application/json',
     };
 
@@ -56,37 +56,37 @@ class JoblyApi {
 
   /** Register a new user
    * Returns a string token  */
-  static async registerUser(formData) {
+  static async registerUser(body) {
 
-    let res = await this.request('auth/register', formData, 'POST');
+    let res = await this.request('auth/register', body, 'POST');
 
     return res.token;
   }
 
   /** Login an existing user
   * Returns a string token  */
-  static async loginUser(formData) {
-    let res = await this.request('auth/token', formData, 'POST');
+  static async loginUser(body) {
+    let res = await this.request('auth/token', body, 'POST');
 
     return res.token;
   }
 
   /** Update an existing user profile information
   * Returns a string token  */
-  static async updateUser(formData) {
+  static async updateUser(username, body) {
 
-    let res = await this.request(`/users/${ formData.username }`, formData, 'PATCH');
+    let res = await this.request(`users/${username}`, body, 'PATCH');
 
     return res.user;
   }
 
-   /** Get details on a user by username.
-    * Returns an object {username: 'testuser', firstName: 'Test',
-    * lastName: 'User', email: 'joel@joelburton.com', isAdmin: false}
-   */
+  /** Get details on a user by username.
+   * Returns an object {username: 'testuser', firstName: 'Test',
+   * lastName: 'User', email: 'joel@joelburton.com', isAdmin: false}
+  */
 
-   static async getUser(username) {
-    let res = await this.request(`users/${ username }`);
+  static async getUser(username) {
+    let res = await this.request(`users/${username}`);
     //console.log('RES USER', res.user)
     return res.user;
   }
@@ -104,7 +104,7 @@ class JoblyApi {
 
   /** Get details on a company by handle. */
   static async getCompany(handle) {
-    let res = await this.request(`companies/${ handle }`);
+    let res = await this.request(`companies/${handle}`);
     return res.company;
   }
 

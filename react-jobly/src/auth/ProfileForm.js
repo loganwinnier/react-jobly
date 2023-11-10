@@ -1,18 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import Alert from "../Alert";
+import { useNavigate } from "react-router-dom";
+import userContext from "../userContext";
 
-/** profile Form Component
+
+/** Profile Form Component
  *
  * State:
- * formData: data from profile form
+ * formData: data from registration form
+ * errors: null or an array of errors to render
  *
  * Props:
- * -update: a function for
+ * -update: a function for updating users
  *
- * {CompanyPage, JobPage} --> profileBar
+ * RouteList --> ProfileForm --> Alert
  */
 function ProfileForm({ update }) {
 
-  const [formData, setFormData] = useState("");
+  const user = useContext(userContext);
+
+  const userInfo = {
+    username: user.username,
+    firstName: user.firstName,
+    lastName: user.lastName,
+    email: user.email
+  }
+
+  const [formData, setFormData] = useState(userInfo);
+  const [errors, setErrors] = useState(null);
+  const navigate = useNavigate();
 
   /** Update local state w/curr state of input elem */
   function handleChange(evt) {
@@ -23,19 +39,62 @@ function ProfileForm({ update }) {
     }));
   }
 
-  function handleSubmit(evt) {
+  /** handleSubmit: attempts to update user info and redirect to homepage
+   * if failed set error state*/
+  async function handleSubmit(evt) {
     evt.preventDefault();
-    const trimmedFormData = formData.trim();
-    setFormData(trimmedFormData);
+    try {
+        await update(user.username, {
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          email: formData.email
+        });
+      navigate('/');
+    } catch (err) {
+      console.error(err);
+      setErrors(err);
+    }
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input id="profile-field"
-        value={formData}
-        onChange={handleChange} />
-      <button>profile</button>
-    </form>
+    < form onSubmit={handleSubmit} style={{
+      display: "flex",
+      flexDirection: "column",
+      margin: "10px 30%"
+    }}>
+      {(errors && <Alert messages={errors} type='error' />)}
+      <label htmlFor="username">Username</label>
+      <input
+        id="username"
+        name="username"
+        value={formData.username}
+        onChange={handleChange}
+        disabled
+      />
+      <label htmlFor="first-name">First Name</label>
+      <input
+        id="first-name"
+        name="firstName"
+        value={formData.firstName}
+        onChange={handleChange}
+      />
+      <label htmlFor="last-name">Last Name</label>
+      <input
+        id="last-name"
+        name="lastName"
+        value={formData.lastName}
+        onChange={handleChange}
+      />
+
+      <label htmlFor="email">Email</label>
+      <input
+        id="email"
+        name="email"
+        value={formData.email}
+        onChange={handleChange}
+      />
+      <button>Update</button>
+    </form >
   );
 }
 

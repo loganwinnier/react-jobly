@@ -13,9 +13,11 @@ function Homepage() {
   const user = useContext(userContext);
 
   return (
-    <div>
-      <h1 className='mt-5'>All the jobs. In one convenient place.</h1>
-      {user && <h2 className='mt-5'>Welcome back {user.firstName}</h2>}
+    <div className='homepage'>
+      <h1 className='title'>Jobly</h1>
+      <img className='logo-img' alt='logo ' src='https://www.svgrepo.com/show/85068/job.svg' />
+      <h2 className='title'>All the jobs. In one convenient place.</h2>
+      {user && <h3 className='subtitle'>Welcome back {user.firstName}</h3>}
     </div>
   );
 }

@@ -1,7 +1,7 @@
 .navbar {
   text-align: center;
   align-items: center;
-  background-color: tan ;
+  background-color: #8C4C3E;
 
   border-radius: 2px;
   width: 70vw;
@@ -9,6 +9,6 @@
 }
 
 .link {
-  color: rgb(60, 6, 98);
+  color: whitesmoke;
   font-weight: 500;
 }

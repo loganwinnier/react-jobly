@@ -19,7 +19,7 @@ function CompanyCard({ company }) {
 
   return (
     <Link class='link' to={`/companies/${ company.handle }`}>
-      <div class='card' style={{ backgroundColor: `rgb(${ r }, ${ g }, ${ b })` }}>
+      <div class='card cards' style={{ backgroundColor: `rgb(${ r }, ${ g }, ${ b })` }}>
         <h4 className="card-title">{company.name}</h4>
         {company.logoUrl && <img className='logo'
           src={`./${ company.logoUrl }`}

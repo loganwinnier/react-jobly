@@ -24,7 +24,7 @@ function ProfileForm({ update }) {
     firstName: user.firstName,
     lastName: user.lastName,
     email: user.email
-  }
+  };
 
   const [formData, setFormData] = useState(userInfo);
   const [errors, setErrors] = useState(null);
@@ -44,11 +44,11 @@ function ProfileForm({ update }) {
   async function handleSubmit(evt) {
     evt.preventDefault();
     try {
-        await update(user.username, {
-          firstName: formData.firstName,
-          lastName: formData.lastName,
-          email: formData.email
-        });
+      await update(user.username, {
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email
+      });
       navigate('/');
     } catch (err) {
       console.error(err);
@@ -57,11 +57,7 @@ function ProfileForm({ update }) {
   }
 
   return (
-    < form onSubmit={handleSubmit} style={{
-      display: "flex",
-      flexDirection: "column",
-      margin: "10px 30%"
-    }}>
+    < form onSubmit={handleSubmit} className="card">;
       {(errors && <Alert messages={errors} type='error' />)}
       <label htmlFor="username">Username</label>
       <input

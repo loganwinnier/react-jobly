@@ -46,26 +46,26 @@ function LoginForm({ login }) {
       setErrors(err);
     }
   }
-
+  const styling = "search-field form-control-sm mb-2";
   return (
-    < form onSubmit={handleSubmit} >
+    < form onSubmit={handleSubmit} className="card ">
       {(errors && <Alert messages={errors} type='error' />)}
       <label htmlFor="username">Username</label>
-      <input
+      <input className={styling}
         id="username"
         name="username"
         value={formData.username}
         onChange={handleChange}
       />
       <label htmlFor="password">Password</label>
-      <input
+      <input className={styling}
         id="password"
         name="password"
         value={formData.password}
         onChange={handleChange}
         type='password'
       />
-      <button>login</button>
+      <button className="btn btn-info p-0 px-1 m-1 border border-1 border-dark">login</button>
     </form >
   );
 }

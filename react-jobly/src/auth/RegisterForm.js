@@ -49,22 +49,19 @@ function RegisterForm({ register }) {
     }
   }
 
+  const styling = "search-field form-control-sm mb-2";
   return (
-    < form onSubmit={handleSubmit} style={{
-      display: "flex",
-      flexDirection: "column",
-      margin: "10px 30%"
-    }}>
+    < form onSubmit={handleSubmit} className="card">
       {(errors && <Alert messages={errors} type='error' />)}
       <label htmlFor="username">Username</label>
-      <input
+      <input className={styling}
         id="username"
         name="username"
         value={formData.username}
         onChange={handleChange}
       />
       <label htmlFor="password">Password</label>
-      <input
+      <input className={styling}
         id="password"
         name="password"
         value={formData.password}
@@ -72,14 +69,14 @@ function RegisterForm({ register }) {
         type="password"
       />
       <label htmlFor="first-name">First Name</label>
-      <input
+      <input className={styling}
         id="first-name"
         name="firstName"
         value={formData.firstName}
         onChange={handleChange}
       />
       <label htmlFor="last-name">Last Name</label>
-      <input
+      <input className={styling}
         id="last-name"
         name="lastName"
         value={formData.lastName}
@@ -87,13 +84,13 @@ function RegisterForm({ register }) {
       />
 
       <label htmlFor="email">Email</label>
-      <input
+      <input className={styling}
         id="email"
         name="email"
         value={formData.email}
         onChange={handleChange}
       />
-      <button>Signup</button>
+      <button className="btn btn-info p-0 px-1 m-1 border border-1 border-dark">Signup</button>
     </form >
   );
 }

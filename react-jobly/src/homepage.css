@@ -1,7 +1,32 @@
-body {
-  align-items: center;
+.homepage {
+  left: 0;
+  width: 100vw;
+  height: 100vh;
   justify-content: center;
-  color: brown;
+  color: rgb(255, 255, 255);
   font-weight: 700;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
   background-image: url('https://images.unsplash.com/photo-1527192491265-7e15c55b1ed2?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')
+}
+
+.title {
+  transform: translateY(-200%);
+  background-color: rgba(0, 0, 0, 0.359);
+  padding: .5em 1em;
+  margin: -.2em 1em;
+  border-radius: 5px;
+}
+
+.subtitle {
+  transform: translateY(-200%);
+  background-color: rgba(0, 0, 0, 0.359);
+  padding: .5em 1em;
+  border-radius: 5px;
+}
+
+.logo-img {
+  display: block;
+  width: 25%;
 }

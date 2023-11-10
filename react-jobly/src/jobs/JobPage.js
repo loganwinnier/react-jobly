@@ -18,6 +18,7 @@ import LoadingSpinner from "../LoadingSpinner";
  */
 function JobPage() {
   const [jobs, setJobs] = useState(null);
+  const [shown, setShown] = useState([0, 5]);
 
   useEffect(function getJobsWhenMounted() {
     fetchJobs();
@@ -28,12 +29,27 @@ function JobPage() {
     setJobs(jobArray);
   };
 
+  function showMore() {
+    if (shown[1] < jobs.length) {
+      setShown(show => [show[0] + 5, show[1] + 5]);
+    }
+  }
+
+  function showPrevious() {
+    if (shown[1] <= jobs.length) {
+      setShown(show => [show[0] - 5, show[1] - 5]);
+    }
+  }
+
   if (!jobs) return <LoadingSpinner title="Jobs" />;
   if (!jobs.length) return <h2>No Jobs Found</h2>;
   return (
     <div>
       <SearchBar search={fetchJobs} />
-      <JobList jobs={jobs} />
+      <JobList
+        jobs={jobs}
+        showMore={showMore} showPrevious={showPrevious}
+        shown={shown} />
     </div>
   );
 

@@ -20,6 +20,7 @@ function CompanyPage() {
   const [companies, setCompanies] = useState(null);
   const [shown, setShown] = useState([0, 5]);
   const user = useContext(userContext);
+
   useEffect(function getCompaniesWhenMounted() {
     fetchCompanies();
   }, [user]);
@@ -33,13 +34,11 @@ function CompanyPage() {
     if (shown[1] < companies.length) {
       setShown(show => [show[0] + 5, show[1] + 5]);
     }
-    return shown[1] >= companies.length;
   }
 
   function showPrevious() {
     if (shown[1] <= companies.length) {
       setShown(show => [show[0] - 5, show[1] - 5]);
-      console.log(shown);
     }
   }
 
@@ -50,8 +49,9 @@ function CompanyPage() {
     <div>
       <SearchBar search={fetchCompanies} />
       <CompanyList
-        companies={companies.slice(shown[0], shown[1])}
-        showMore={showMore} showPrevious={showPrevious} />
+        companies={companies}
+        showMore={showMore} showPrevious={showPrevious}
+        shown={shown} />
     </div>
   );
 

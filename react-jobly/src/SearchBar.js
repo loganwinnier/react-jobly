@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { debounce } from "lodash";
 
 
 /** Search Form Component
@@ -36,10 +35,10 @@ function SearchBar({ search }) {
 
     return (
         <form onSubmit={handleSubmit}>
-            <input id="search-field"
+            <input className="search-field form-control-sm mt-3 mb-2"
                 value={formData}
                 onChange={handleChange} />
-            <button>Search</button>
+            <button className="btn btn-info p-0 px-1 m-1 border border-1 border-dark">Search</button>
         </form>
     );
 }

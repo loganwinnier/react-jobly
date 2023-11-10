@@ -65,6 +65,7 @@ function ProfileForm({ update }) {
       {(errors && <Alert messages={errors} type='error' />)}
       <label htmlFor="username">Username</label>
       <input
+        className="search-field form-control-sm mb-2"
         id="username"
         name="username"
         value={formData.username}
@@ -73,6 +74,7 @@ function ProfileForm({ update }) {
       />
       <label htmlFor="first-name">First Name</label>
       <input
+        className="search-field form-control-sm mb-2"
         id="first-name"
         name="firstName"
         value={formData.firstName}
@@ -80,6 +82,7 @@ function ProfileForm({ update }) {
       />
       <label htmlFor="last-name">Last Name</label>
       <input
+        className="search-field form-control-sm mb-2"
         id="last-name"
         name="lastName"
         value={formData.lastName}
@@ -88,12 +91,13 @@ function ProfileForm({ update }) {
 
       <label htmlFor="email">Email</label>
       <input
+        className="search-field form-control-sm mb-2"
         id="email"
         name="email"
         value={formData.email}
         onChange={handleChange}
       />
-      <button>Update</button>
+      <button className="btn btn-info p-0 px-1 m-1 border border-1 border-dark">Update</button>
     </form >
   );
 }

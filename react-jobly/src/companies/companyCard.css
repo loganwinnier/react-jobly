@@ -7,9 +7,12 @@
     padding: 1em;
     border: 2px solid rgba(0, 0, 0, 0.119);
     filter: drop-shadow(5px 5px 4px rgba(0, 0, 0, 0.119));
+    width: 60vw;
 }
 
-.card:hover {}
+.card:hover {
+    background-color: rgb(57, 138, 111) !important;
+}
 
 .card-title {
     color: bisque;

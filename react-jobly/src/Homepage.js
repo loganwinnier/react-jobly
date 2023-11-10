@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import userContext from './userContext';
+import './homepage.css';
 
 
 
@@ -13,8 +14,8 @@ function Homepage() {
 
   return (
     <div>
-      <h2>All the jobs. In one convenient place.</h2>
-      {user && <h4>Welcome back {user.firstName}</h4>}
+      <h1 className='mt-5'>All the jobs. In one convenient place.</h1>
+      {user && <h2 className='mt-5'>Welcome back {user.firstName}</h2>}
     </div>
   );
 }

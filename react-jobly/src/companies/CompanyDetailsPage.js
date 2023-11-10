@@ -43,8 +43,9 @@ function CompanyDetailsPage() {
     <div>
       <div style={{
         margin: "1em",
-        backgroundColor: "goldenrod",
+        backgroundColor: "wheat",
         borderRadius: "8px",
+        width: "65vw",
       }}>
         <h4>{company.name}</h4>
         <p>{company.description}</p>

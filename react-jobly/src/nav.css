@@ -1,0 +1,14 @@
+.navbar {
+  text-align: center;
+  align-items: center;
+  background-color: tan ;
+
+  border-radius: 2px;
+  width: 70vw;
+  margin: auto;
+}
+
+.link {
+  color: rgb(60, 6, 98);
+  font-weight: 500;
+}

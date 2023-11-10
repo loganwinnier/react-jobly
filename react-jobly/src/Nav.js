@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import userContext from "./userContext";
+import './nav.css';
 
 /**
  * Component serving navigation links
@@ -15,21 +16,21 @@ function Nav({ logout }) {
 
   function loggedInNav() {
     return (
-      <nav>
-        <Link to='/'> Homepage </Link>
-        <Link to='/companies'> Companies </Link>
-        <Link to='/jobs'> Jobs </Link>
-        <Link to='/profile'> Profile </Link>
-        <Link to='/' onClick={logout}> Logout {user.username} </Link>
+      <nav className="navbar m-1 p-1 px-5">
+        <Link className="link" to='/'> Homepage </Link>
+        <Link className="link" to='/companies'> Companies </Link>
+        <Link className="link" to='/jobs'> Jobs </Link>
+        <Link className="link" to='/profile'> Profile </Link>
+        <Link className="link" to='/' onClick={logout}> Logout {user.username} </Link>
       </nav>);
   }
 
   function anonNav() {
     return (
-      <nav>
-        <Link to='/'> Homepage </Link>
-        <Link to='/signup'> Signup </Link>
-        <Link to='/login'> Login </Link>
+      <nav className="navbar m-1 p-1 px-5">
+        <Link className="link" to='/'> Homepage </Link>
+        <Link className="link" to='/signup'> Signup </Link>
+        <Link className="link" to='/login'> Login </Link>
       </nav>
     );
   }

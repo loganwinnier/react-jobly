@@ -11,16 +11,17 @@ import React from "react";
 
 function JobCard({ job }) {
   const salary = new Intl.NumberFormat().format(job.salary);
+  const randomBetween = (min, max) => min + Math.floor(Math.random() * (max - min + 1));
+  const r = randomBetween(50, 150);
+  const g = randomBetween(50, 150);
+  const b = randomBetween(100, 200);
+
   return (
-    <div style={{
-      border: "2px solid black",
-      margin: "1em",
-      backgroundColor: "tan"
-    }}>
-      <h4>{job.title}</h4>
-      <p>{job.companyName}</p>
-      <p>{job.salary ? `Salary: $${ salary }` : "No Salary Listed"}</p>
-      <p>{job.equity ? `Equity: ${ (job.equity * 200).toFixed(1) }%` : "No Equity Listed"}</p>
+    <div className='card' style={{ backgroundColor: `rgb(${ r }, ${ g }, ${ b })` }}>
+      <h4 className="card-title">{job.title}</h4>
+      <p className="card-text">{job.companyName}</p>
+      <p className="card-text">{job.salary ? `Salary: $${ salary }` : "No Salary Listed"}</p>
+      <p className="card-text">{job.equity ? `Equity: ${ (job.equity * 200).toFixed(1) }%` : "No Equity Listed"}</p>
     </div>
   );
 

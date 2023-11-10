@@ -15,15 +15,17 @@ import { debounce } from "lodash";
 function SearchBar({ search }) {
 
     const [formData, setFormData] = useState("");
-
-    useEffect(function liveSearch() {
-        search(formData.trim());
+    console.log(formData);
+    useEffect(() => {
+        search(formData);
     }, [formData]);
 
     /** Update local state w/curr state of input elem */
     function handleChange(evt) {
-        debounce( function() {setFormData(evt.target.value)}, 1000);
+        setFormData(evt.target.value);
     };
+
+
 
     function handleSubmit(evt) {
         evt.preventDefault();

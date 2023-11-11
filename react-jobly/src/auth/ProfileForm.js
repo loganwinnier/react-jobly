@@ -57,7 +57,7 @@ function ProfileForm({ update }) {
   }
 
   return (
-    < form onSubmit={handleSubmit} className="card">;
+    < form onSubmit={handleSubmit} className="card form">
       {(errors && <Alert messages={errors} type='error' />)}
       <label htmlFor="username">Username</label>
       <input

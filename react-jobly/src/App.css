@@ -35,3 +35,21 @@
 .link {
   text-decoration: none;
 }
+
+.search-btn {
+  margin: -4em;
+  border: none;
+  border-radius: 25px;
+  background-color: #91D9C4;
+  border: 1px solid rgb(227, 227, 227);
+  padding: .25em 1em;
+}
+
+.search-field {
+  margin: .75em .75em 0 -5em;
+  padding: .25em 0 .25em 4em;
+  width: 30vw;
+  border: none;
+  border: 1px solid rgb(227, 227, 227);
+  border-radius: 25px;
+}

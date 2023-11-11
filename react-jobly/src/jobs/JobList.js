@@ -16,9 +16,10 @@ function JobList({ jobs, shown, showMore, showPrevious }) {
   return (
     <div>
       {someJobs.map(job => <JobCard key={job.id} job={job} />)}
-      {!(shown[0] === 0) && <button onClick={showPrevious}>Show Prev</button>}
+      {(shown[0] > 0) && <button onClick={showPrevious}>Show Prev</button>}
       {shown[1] < jobs.length && <button onClick={showMore}>Show More</button>}
     </div>
-  );}
+  );
+}
 
 export default JobList;

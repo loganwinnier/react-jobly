@@ -12,14 +12,9 @@ import './companyCard.css';
  * CompanyList --> CompanyCard
  */
 function CompanyCard({ company }) {
-  const randomBetween = (min, max) => min + Math.floor(Math.random() * (max - min + 1));
-  const r = randomBetween(50, 150);
-  const g = randomBetween(50, 150);
-  const b = randomBetween(100, 200);
-
   return (
     <Link className='link' to={`/companies/${ company.handle }`}>
-      <div className='card cards' style={{ backgroundColor: `rgb(${ r }, ${ g }, ${ b })` }}>
+      <div className='card display-card'>
         <h4 className="card-title">{company.name}</h4>
         {company.logoUrl && <img className='logo'
           src={`./${ company.logoUrl }`}

@@ -34,10 +34,10 @@ function SearchBar({ search }) {
 
     return (
         <form onSubmit={handleSubmit}>
-            <input className="search-field form-control-sm mt-3 mb-2"
+            <input className="search-field"
                 value={formData}
                 onChange={handleChange} />
-            <button className="btn btn-info p-0 px-1 m-1 border border-1 border-dark">Search</button>
+            <button className="search-btn">Search</button>
         </form>
     );
 }

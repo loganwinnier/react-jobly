@@ -1,15 +1,17 @@
 .navbar {
   text-align: center;
   align-items: center;
-  background-color: #8C4C3E;
-
+  background-color: #014034;
+  height: 3em;
   width: 70vw;
-  margin: auto;
+  margin: 2em;
   border: 2px solid rgba(0, 0, 0, 0.119);
   filter: drop-shadow(2px 5px 2px rgba(0, 0, 0, 0.147));
+  flex-wrap: nowrap;
 }
 
 .link {
   color: whitesmoke;
   font-weight: 500;
+  margin: 0 .25em;
 }

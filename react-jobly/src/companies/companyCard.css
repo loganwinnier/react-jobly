@@ -1,6 +1,6 @@
 .card {
     margin: 1em 2em;
-    background-color: #8C8279;
+    background-color: #F2F2F2;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -8,18 +8,20 @@
     border: 2px solid rgba(0, 0, 0, 0.119);
     filter: drop-shadow(5px 5px 4px rgba(0, 0, 0, 0.119));
     width: 60vw;
+    border-radius: 0;
 }
 
-.card:hover {
-    background-color: rgb(57, 138, 111) !important;
+.display-card:hover {
+    background-color: #ffffffde !important;
 }
 
 .card-title {
-    color: bisque;
+    color: #0d0d0d;
+    font-weight: 700;
     text-decoration: none;
 }
 
 .card-text {
-    color: rgb(241, 230, 220);
+    color: #363636;
     text-decoration: none;
 }

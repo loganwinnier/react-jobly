@@ -16,13 +16,16 @@ function Nav({ logout }) {
 
   function loggedInNav() {
     return (
-      <nav className="navbar m-1 p-1 px-5">
-        <Link className="link" to='/'> Homepage </Link>
-        <Link className="link" to='/companies'> Companies </Link>
-        <Link className="link" to='/jobs'> Jobs </Link>
-        <Link className="link" to='/profile'> Profile </Link>
-        <Link className="link" to='/' onClick={logout}> Logout {user.username} </Link>
-      </nav>);
+      <>
+        <h2>Jobly</h2>
+        <nav className="navbar m-1 p-1 px-5">
+          <Link className="link" to='/'> Homepage </Link>
+          <Link className="link" to='/companies'> Companies </Link>
+          <Link className="link" to='/jobs'> Jobs </Link>
+          <Link className="link" to='/profile'> Profile </Link>
+          <Link className="link" to='/' onClick={logout}> Logout {user.username} </Link>
+        </nav>
+      </>);
   }
 
   function anonNav() {
